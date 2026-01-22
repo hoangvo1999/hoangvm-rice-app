@@ -17,7 +17,7 @@ const pool = new Pool({
 
 // API 1: Kiểm tra kết nối
 app.get('/', (req, res) => {
-  res.send('Chào mừng đến với cửa hàng bán gạo của hoangvm!');
+  res.send('Hello Words');
 });
 
 // API 2: Lấy danh sách các loại gạo

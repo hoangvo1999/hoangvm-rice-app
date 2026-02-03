@@ -17,7 +17,7 @@ const pool = new Pool({
 
 // API 1: Kiểm tra kết nối
 app.get('/', (req, res) => {
-  res.send('Finish Mock');
+  res.send('MockProject');
 });
 
 // API 2: Lấy danh sách các loại gạo

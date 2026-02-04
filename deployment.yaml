@@ -19,11 +19,11 @@ spec:
         - name: DB_HOST
           value: "terraform-20260121090946559500000001.cb8me0sq0urz.ap-southeast-1.rds.amazonaws.com"
         - name: DB_USER
-          value: "admin_hoangvm" 
+          value: "admin_hoangvm"
         - name: DB_NAME
-          value: "hoangvm_gao_db" 
+          value: "postgres"
         - name: DB_PASSWORD
-          value: "Hoangvm2026" 
+          value: "Hoangvm2026"
         ports:
         - containerPort: 3000
 ---

@@ -23,7 +23,7 @@ kind: Service
 metadata:
   name: hoangvm-rice-service
 spec:
-  type: LoadBalancer # Tạo địa chỉ web công khai
+  type: LoadBalancer 
   selector:
     app: rice-store
   ports:

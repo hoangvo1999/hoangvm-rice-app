@@ -16,10 +16,7 @@ const pool = new Pool({
 });
 
 // API 1: Kiểm tra kết nối
-app.get('/', (req, res) => {
-  res.send('MockProject');
-});
-
+app.use(express.static('public'));
 // API 2: Lấy danh sách các loại gạo
 app.get('/gao', async (req, res) => {
   try {

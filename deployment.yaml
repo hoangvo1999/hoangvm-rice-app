@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hoangvm-rice-app
 spec:
-  replicas: 2 # Chạy 2 bản sao để web luôn sống
+  replicas: 2
   selector:
     matchLabels:
       app: rice-store

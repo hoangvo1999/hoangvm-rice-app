@@ -15,6 +15,15 @@ spec:
       containers:
       - name: rice-app
         image: 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest
+        env:
+        - name: DB_HOST
+          value: "terraform-20260121090946559500000001.cb8me0sq0urz.ap-southeast-1.rds.amazonaws.com " 
+        - name: DB_USER
+          value: "admin_hoangvm" 
+        - name: DB_NAME
+          value: "hoangvm_gao_db" 
+        - name: DB_PASSWORD
+          value: "Hoangvm2026" 
         ports:
         - containerPort: 3000
 ---
@@ -30,15 +39,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
-containers:
-      - name: hoangapp
-        image: <link-ecr-của-bạn>:latest
-        env:
-        - name: DB_HOST
-          value: "hoangvm-db.c123456789.ap-southeast-1.rds.amazonaws.com" 
-        - name: DB_USER
-          value: "postgres" 
-        - name: DB_NAME
-          value: "postgres" 
-        - name: DB_PASSWORD
-          value: "Hoangvm12345" 
+
+        

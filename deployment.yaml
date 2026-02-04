@@ -30,3 +30,15 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
+containers:
+      - name: hoangapp
+        image: <link-ecr-của-bạn>:latest
+        env:
+        - name: DB_HOST
+          value: "hoangvm-db.c123456789.ap-southeast-1.rds.amazonaws.com" 
+        - name: DB_USER
+          value: "postgres" 
+        - name: DB_NAME
+          value: "postgres" 
+        - name: DB_PASSWORD
+          value: "Hoangvm12345" 

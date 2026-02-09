@@ -15,6 +15,7 @@ spec:
       containers:
       - name: rice-app
         image: 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest
+        imagePullPolicy: Always
         env:
         - name: DB_HOST
           value: "terraform-20260121090946559500000001.cb8me0sq0urz.ap-southeast-1.rds.amazonaws.com"

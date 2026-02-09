@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: rice-store
+      annotations:
+        build_number: "1"
     spec:
       containers:
       - name: rice-app

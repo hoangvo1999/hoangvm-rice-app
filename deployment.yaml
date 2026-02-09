@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rice-app
-        image: 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest
+        image: 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:v1
         imagePullPolicy: Always
         env:
         - name: DB_HOST

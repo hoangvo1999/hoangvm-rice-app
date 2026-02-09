@@ -1,29 +1,25 @@
 
 pipeline {
     agent any
-    stages {
-        stage('Build & Push Image') {
-            steps {
-                // Jenkins sẽ dùng chìa khóa bạn vừa tạo để thực hiện lệnh
-                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                                 string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    
-                    sh "aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com"
-                    sh 'docker build -t hoangvm-rice-app .'
-                    sh 'docker tag hoangvm-rice-app:latest 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest'
-                    sh 'docker push 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest'
-                }
-            }
-        }
-        stage('Deploy to EKS') {
-            steps {
-                withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                                 string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    
-                    sh 'aws eks update-kubeconfig --region ap-southeast-1 --name hoangvm-rice-cluster'
-                    sh 'kubectl apply -f deployment.yaml'
-                }
-            }
+    stage('Build & Push Image') {
+    steps {
+        withCredentials([...]) {
+            // Jenkins build và đẩy image với Tag theo số lần build (BUILD_NUMBER)
+            sh "docker build -t hoangvm-rice-app:${env.BUILD_NUMBER} ."
+            sh "docker tag hoangvm-rice-app:${env.BUILD_NUMBER} 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:${env.BUILD_NUMBER}"
+            sh "docker push 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:${env.BUILD_NUMBER}"
         }
     }
+}
+
+// THAY THẾ STAGE DEPLOY CŨ BẰNG STAGE NÀY
+stage('Update Manifest in GitHub') {
+    steps {
+        // Lệnh dùng sed để sửa file deployment.yaml từ 'latest' sang số version mới
+        sh "sed -i 's/:latest/:${env.BUILD_NUMBER}/g' deployment.yaml"
+        sh "git add deployment.yaml"
+        sh "git commit -m 'Update image to version ${env.BUILD_NUMBER}'"
+        sh "git push origin main"
+    }
+}
 }

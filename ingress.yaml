@@ -10,13 +10,12 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    #- host: gao.hoangvm.local
-    -  http:
+    - http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
                 name: hoangvm-rice-service
                 port:
-                  number: 80
-            path: /
-            pathType: Prefix
+                  number: 80 

@@ -11,24 +11,34 @@ spec:
     metadata:
       labels:
         app: rice-store
-      annotations:
-        build_number: "1"
     spec:
+      serviceAccountName: rice-sa
       containers:
-      - name: rice-app
-        image: 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest
-        imagePullPolicy: Always
-        env:
-        - name: DB_HOST
-          value: "terraform-20260121090946559500000001.cb8me0sq0urz.ap-southeast-1.rds.amazonaws.com"
-        - name: DB_USER
-          value: "admin_hoangvm"
-        - name: DB_NAME
-          value: "postgres"
-        - name: DB_PASSWORD
-          value: "Hoangvm2026"
-        ports:
-        - containerPort: 3000
+        - name: rice-app
+          image: 164693826317.dkr.ecr.ap-southeast-1.amazonaws.com/hoangvm-rice-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: terraform-20260121090946559500000001.cb8me0sq0urz.ap-southeast-1.rds.amazonaws.com
+            - name: DB_USER
+              value: admin_hoangvm
+            - name: DB_NAME
+              value: postgres
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rice-db-secret
+                  key: DB_PASSWORD
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
 ---
 apiVersion: v1
 kind: Service

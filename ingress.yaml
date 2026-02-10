@@ -8,7 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
 spec:
-  ingressClassName: alb # Khai báo sử dụng controller đã cài ở bước 1
+  ingressClassName: alb 
   rules:
     - http:
         paths:
@@ -16,6 +16,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: hoangvm-rice-service # Phải đúng tên Service ở trên
+                name: hoangvm-rice-service
                 port:
                   number: 80

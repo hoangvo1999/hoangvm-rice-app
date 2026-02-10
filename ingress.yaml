@@ -9,8 +9,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: gao.hoangvm.local
-      http:
+    #- host: gao.hoangvm.local
+    -  http:
         paths:
           - backend:
               service:

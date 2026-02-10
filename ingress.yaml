@@ -7,10 +7,12 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: instance
     alb.ingress.kubernetes.io/subnets: subnet-0b33c0ccbb3b5cd5c, subnet-0fa85b6cf43bd3b7d
+    alb.ingress.kubernetes.io/success-codes: 200-399
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: hoangvm.local
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -18,4 +20,14 @@ spec:
               service:
                 name: hoangvm-rice-service
                 port:
-                  number: 80 
+                  number: 80
+    - host: argo.hoangvm.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 80

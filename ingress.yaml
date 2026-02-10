@@ -5,9 +5,8 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: instance
-    kubernetes.io/ingress.class: alb
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  ingressClassName: alb 
   rules:
     - http:
         paths:
@@ -15,6 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: hoangvm-rice-service
+                name: hoangvm-rice-service 
                 port:
                   number: 80

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hoangvm-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: gao.hoangvm.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hoangvm-rice-service
+            port:
+              number: 80

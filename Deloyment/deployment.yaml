@@ -12,6 +12,8 @@ spec:
       app: rice-store
   template:
     metadata:
+      annotations:
+        redeploy: "true"
       labels:
         app: rice-store
     spec:
